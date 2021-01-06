@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Demo iframe</title>
+        <link rel="stylesheet" href="/material.css">
+        <link rel="stylesheet" href="/roto.css">
+        <link rel="stylesheet" href="/font-awesome.min.css">
+        <link rel="stylesheet" href="/bootstrap.min.css">
+         <script src="/jquery.min.js"></script>
+         <script src="/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="/style.css">
+        <script type="text/javascript" src="/main.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12" >
+                    <div class="well well-lg">
+                        <h3>Welcome <span class="username"><%=user%></span> <a href="/logout" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                        </a>|<a href="/password" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-log-out"></span> Change password
+                        </a></h3> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="col-sm-12 right">
+                    <div class="table-wrapper table-responsive">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Manage <b>Iframe </b></h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="" class="btn btn-success" id="Add" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Api</span></a>
+                                    <a href="#deleteEmployeeModal" class="btn btn-danger" id="DeleteAll" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover " id="tbfilter" >
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="custom-checkbox">
+                                        <input type="checkbox" id="selectAll">
+                                        <label for="selectAll"></label>
+                                        </span>
+                                    </th>
+                                     <th>Params </th>
+                                    <th>Title</th>
+                                    <th>Link iframe</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                             <% for(i in dtall) { %>
+                                
+                                <tr id="<%= dtall[i].id %>">
+                                    <td>
+                                        <span class="custom-checkbox">
+                                        <input type="checkbox"  name="options[]" value="<%= dtall[i].id %>">
+                                        <label for="checkbox1"></label>
+                                        </span>
+                                    </td>
+                                    <td class="param d-flex flex-row"><span>/</span><input name="param" type="url" value="<%= dtall[i].param %>" readonly></td>
+                                    <td class="name"><input name="name" type="text" value="<%= dtall[i].name %>" readonly></td>
+                                    <td class="urliframe"><input type="url" name="url" value="<%= dtall[i].urliframe %>" readonly></td>
+                                    <td>
+                                        <a href="javascript:function() { return false; }" class="editt"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xe3c9</i></a>
+                                        <a href="#deleteEmployeeModal"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                </div>
+                <div class="hidden" id="ab" data-id="fdfdf"></div>
+                <div class="modal fade" id="addfilter" data-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><span class="madd">Add</span> Filter</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                            </div>
+                            <div class="modal-body">
+                            <input type="text" class="d-none vlid" value="abc"> 
+                                <div>
+                                    <label>Name</label>
+                                    <input name="namef" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                <input type="button" id="addFilterr" class="btn btn-success" value="Add">
+                            </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Delete Modal HTML -->
+                <div id="deleteEmployeeModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Api</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete these Records?</p>
+                                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                    <input type="button" class="btn btn-danger remove" value="Delete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>

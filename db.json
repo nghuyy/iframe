@@ -1,0 +1,38 @@
+{
+  "posts": [
+    {
+      "id": "6a827c25-fbe0-49c7-a9a6-73e14804d6d4",
+      "name": "weather",
+      "param": "test",
+      "urliframe": "http://www.weather.gov/",
+      "createdat": "1609819357000",
+      "createby": "admin",
+      "updateat": "1609924864000",
+      "modifyby": "admin"
+    },
+    {
+      "id": "6271cd72-6225-4d3c-a75b-c7af017ff246",
+      "name": "ggG",
+      "param": "gg",
+      "urliframe": "ggg",
+      "createdat": "1609926020000",
+      "createby": "admin",
+      "updateat": "1609928709000",
+      "modifyby": "admin"
+    },
+    {
+      "id": "c5aa393a-8e84-48b0-837b-da46847564ef",
+      "name": "aa",
+      "param": "aa",
+      "urliframe": "https://botorder.com/store",
+      "createdat": "1609928004000",
+      "createby": "admin"
+    }
+  ],
+  "user": [
+    {
+      "username": "admin",
+      "password": "$2a$08$/GnHqTFkMSb6qflDvHm1beiqVUKTTO/bUmMipmVgUDdDhbunrjgKq"
+    }
+  ]
+}
