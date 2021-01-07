@@ -26,10 +26,11 @@ $(document).ready(function(){
             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="" data-original-title="Delete"></i></a>
         </td>
     </tr>
-   
+    <tr> <td></td><th colspan="7"> <span class="cnote">Note: </span> <input class="note" type="text"></th> </tr>
     `;
      $("tbody").prepend(rowtb);
      $("#"+idrow+" .name input").css('border','double');
+     $("#"+idrow).next().find('.note').css('border','double');
      $("#"+idrow+" .param input").css('border','double');
      $("#"+idrow+" .urliframe input").css('border','double');
      $("#"+idrow+" .param input").focus(); 
@@ -80,6 +81,8 @@ $(document).ready(function(){
         $(this).removeClass("update").addClass("editt");
         $(this).find("i").text("edit")
         let idrow=$(this).closest('tr').attr('id');
+        $("#"+idrow).next().find('.note').attr('readonly',true);
+        $("#"+idrow).next().find('.note').css('border','none');
         $("#"+idrow+" .param input").attr("readonly", true); 
         $("#"+idrow+" .param input").css('border','none');
         $("#"+idrow+" .urliframe input").css('border','none');
@@ -90,6 +93,7 @@ $(document).ready(function(){
         let name=$("#"+idrow+" .name input").val();
         let param=$("#"+idrow+" .param input").val();
         let urliframe=$("#"+idrow+" .urliframe input").val();
+        let note=$("#"+idrow).next().find('.note').val();
         const nDate = new Date().toLocaleString('en-US', {
             timeZone: 'Asia/Ho_Chi_Minh'
           });
@@ -99,7 +103,8 @@ $(document).ready(function(){
             "param":param,
             "urliframe":urliframe,
             "updateat":myDate,
-            "modifyby":username
+            "modifyby":username,
+            "note":note
         };
         $.ajax({
             method: "put",
@@ -110,6 +115,7 @@ $(document).ready(function(){
                     $("#"+msg.ifold.id+" .name input").val(msg.ifold.name);
                     $("#"+msg.ifold.id+" .param input").val(msg.ifold.param);
                     $("#"+msg.ifold.id+" .urliframe input").val(msg.ifold.urliframe);
+                    $("#"+msg.ifold.id).next().find('.note').val(msg.ifold.note);
                     alert("Duplicate parameters!")
                 }
             });
@@ -119,6 +125,8 @@ $(document).ready(function(){
         $(this).find("i").text("edit")
         $(this).removeClass("save").addClass("editt");
         let idrow=$(this).closest('tr').attr('id');
+        $("#"+idrow).next().find('.note').attr('readonly',true);
+        $("#"+idrow).next().find('.note').css('border','none');
         $("#"+idrow+" .param input").attr("readonly", true); 
         $("#"+idrow+" .param input").css('border','none');
         $("#"+idrow+" .name input").css('border','none');
@@ -129,6 +137,7 @@ $(document).ready(function(){
        let param=$("#"+idrow+" .param input").val();
         let urliframe=$("#"+idrow+" .urliframe input").val();
         let username=$(".username").text();
+        let note=$("#"+idrow).next().find('.note').val();
         let todaysDate =new Date(); 
         const nDate = todaysDate.toLocaleString('en-US', {
             timeZone: 'Asia/Ho_Chi_Minh'
@@ -140,7 +149,8 @@ $(document).ready(function(){
             "param":param,
             "urliframe":urliframe,
             "createdat":myDate,
-            "createby":username
+            "createby":username,
+            "note":note
         };
         $.ajax({
             method: "post",
@@ -148,6 +158,7 @@ $(document).ready(function(){
             data:dt
             }).done(function( msg ) {
                 if(msg.status=="duplicate"){
+                    $('#tbfilter tr#'+msg.id).next().remove();
                     $('#tbfilter tr#'+msg.id).remove();
                     alert("Duplicate parameters!")
                 }
@@ -158,6 +169,8 @@ $(document).ready(function(){
        $(this).find("i").text("save")
         $(this).removeClass("editt").addClass("update");
         let idrow=$(this).closest('tr').attr('id');
+        $("#"+idrow).next().find('.note').attr('readonly',false);
+        $("#"+idrow).next().find('.note').css('border','double');
         $("#"+idrow+" .name input").css('border','double');
         $("#"+idrow+" .name input").attr("readonly", false); 
         $("#"+idrow+" .urliframe input").css('border','double');
@@ -180,7 +193,7 @@ $(document).ready(function(){
         if($('.remove').attr("data-id")=="all"){
 			if(chkb.length>0){
 				for(l in chkb){
-                    // $('#tbfilter tr#'+chkb[l]).next().remove();
+                    $('#tbfilter tr#'+chkb[l]).next().remove();
 					$('#tbfilter tr#'+chkb[l]).remove();
 					$.ajax({
 					method: "DELETE",
@@ -193,7 +206,7 @@ $(document).ready(function(){
 				alert("You have not selected any item!")
 			}
 		}else{
-            // $('#tbfilter tr#'+$("#ab").data("id")).next().remove();
+            $('#tbfilter tr#'+$("#ab").data("id")).next().remove();
             $('#tbfilter tr#'+$("#ab").data("id")).remove();
 			$.ajax({
 				method: "DELETE",

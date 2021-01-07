@@ -10,9 +10,14 @@ span.home.d-inline.material-icons {
     position: relative;
     top: 4px;
 }
+.note{
+    width: 90%;
+}
+.cnote{
+    color: red;
+}
 
-
-.index1 input, .index2 input{
+.index1 input, .index2 input, .note{
     border: none;
 }
 .home a{

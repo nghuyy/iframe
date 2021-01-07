@@ -39,10 +39,10 @@ function getid(k){
   }
 }
 function checkToken (req, res, next) {
-    const authcookie = req.cookies.authcookie
+    const authcookie = req.cookies.authcookieif
     jwt.verify(authcookie,"iframe",(err,data)=>{
     if(err){
-     res.redirect("login")
+      res.render('404');
     } 
     else if(data.user){
       req.user = data.user
@@ -106,7 +106,7 @@ app.post('/password', async function(req, res) {
       .find({'username':username})
       .assign({'password':pws})
       .write();
-      res.cookie('authcookie',"token",{maxAge:0,httpOnly:true}) 
+      res.cookie('authcookieif',"token",{maxAge:0,httpOnly:true}) 
       res.redirect("login")
     }
 });
@@ -148,7 +148,7 @@ app.post('/login',async function(req, res) {
     let username = req.body.username;
     if(isPasswordMatch){
       const token = jwt.sign({user:username},'iframe')
-      res.cookie('authcookie',token,{maxAge:86400000,httpOnly:true}) 
+      res.cookie('authcookieif',token,{maxAge:86400000,httpOnly:true}) 
       res.redirect("manage")
     }else{
       error.push("Username or password is incorrect !")
@@ -206,7 +206,7 @@ app.post('/login',async function(req, res) {
   res.json({"status":"success"})
   });
 app.get('/logout', function (req, res) {
-    res.cookie('authcookie',"token",{maxAge:0,httpOnly:true}) 
+    res.cookie('authcookieif',"token",{maxAge:0,httpOnly:true}) 
     res.redirect("login")
 });
 app.get('/manage' ,function(req, res) {
